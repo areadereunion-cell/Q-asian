@@ -1,115 +1,155 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useMemo, useState, useEffect } from "react";
+
+import "./styles/resident.css";
+
+import CategoryMenu from "./components/CategoryMenu";
+import EntrepreneurList from "./components/EntrepreneurList";
+import EntrepreneurPanel from "./components/EntrepreneurPanel";
+import KeyboardNavigation from "./components/KeyboardNavigation";
+
+import { emprendedores } from "./data/emprendedores";
 
 export default function EmprendedoresPage() {
+  const categories = useMemo(
+    () => ["COLECCIONABLES", "ARTESANIAS", "GASTRONOMIA", "DULCES", "ROPA"],
+    []
+  );
+
+  const categoryKeyMap = [
+    "coleccionables",
+    "artesanias",
+    "gastronomia",
+    "dulces",
+    "ropa",
+  ] as const;
+
+  const [selectedCategory, setSelectedCategory] = useState(0);
+  const [selectedEntrepreneur, setSelectedEntrepreneur] = useState(0);
+
+  const [menuLevel, setMenuLevel] =
+    useState<"category" | "entrepreneur">("category");
+
+  const [mobileStep, setMobileStep] =
+    useState<"categories" | "entrepreneurs" | "details">("categories");
+
+  const activeCategory = categoryKeyMap[selectedCategory];
+  const entrepreneurs = emprendedores[activeCategory] ?? [];
+
+  useEffect(() => {
+    setSelectedEntrepreneur(0);
+  }, [selectedCategory]);
+
+  const currentEntrepreneur =
+    entrepreneurs[selectedEntrepreneur] ?? entrepreneurs[0];
+
   return (
-    <section className="w-full min-h-screen bg-black text-white flex items-center justify-center relative overflow-hidden">
+    <section className="relative text-white resident-font min-h-[calc(100vh-88px)] mt-[88px] overflow-hidden">
 
       {/* BACKGROUND */}
-      <div className="absolute inset-0">
+      <div className="absolute inset-0 z-0">
         <img
-          src="/images/bg.png"
+          src="/images/bgas.png"
           alt="background"
-          className="w-full h-full object-cover opacity-25 scale-110"
+          className="w-full h-full object-cover scale-110 opacity-60"
+        />
+        <div className="absolute inset-0 bg-black/60" />
+        <div className="absolute top-0 left-0 w-[600px] h-[600px] bg-red-600/10 blur-[160px]" />
+        <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-cyan-500/10 blur-[160px]" />
+      </div>
+
+      {/* KEYBOARD */}
+      <div className="hidden md:block relative z-10">
+        <KeyboardNavigation
+          menuLevel={menuLevel}
+          setMenuLevel={setMenuLevel}
+          selectedCategory={selectedCategory}
+          setSelectedCategory={setSelectedCategory}
+          selectedEntrepreneur={selectedEntrepreneur}
+          setSelectedEntrepreneur={setSelectedEntrepreneur}
+          totalCategories={categories.length}
+          totalEntrepreneurs={entrepreneurs.length}
         />
       </div>
 
-      {/* OVERLAY OSCURO */}
-      <div className="absolute inset-0 bg-black/70" />
+      <main className="relative z-10 p-3 md:p-4">
 
-      {/* CONTENIDO */}
-      <div className="relative z-10 w-full max-w-5xl px-6 py-16">
+        {/* MOBILE */}
+        <div className="md:hidden">
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-14 items-center">
+          {mobileStep === "categories" && (
+            <CategoryMenu
+              categories={categories}
+              selected={selectedCategory}
+              setSelected={(value: number) => {
+                setSelectedCategory(value);
+                setMobileStep("entrepreneurs");
+              }}
+              active={true}
+            />
+          )}
 
-          {/* IZQUIERDA */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            className="space-y-6"
-          >
-
-            <h1 className="text-4xl md:text-6xl font-extrabold">
-              Chulla Q
-            </h1>
-
-            <p className="text-white/50 text-sm tracking-wide">
-              Emprendimiento de cultura coleccionable y anime
-            </p>
-
-            <div className="space-y-5 text-white/70 leading-relaxed text-sm md:text-base">
-
-              <p>
-                <b className="text-white">Chulla Q</b> es un emprendimiento enfocado en la venta de
-                álbumes coleccionables, figuras y productos inspirados en la cultura anime y
-                la cultura pop asiática.
-              </p>
-
-              <p>
-                Su propuesta busca conectar a los fans con piezas únicas, ediciones limitadas
-                y colecciones temáticas de personajes, series y momentos icónicos del anime.
-              </p>
-
-              <p>
-                Dentro del <b className="text-white">Q-Asian Fest</b>, ofrece una experiencia de colección
-                donde los asistentes pueden descubrir, intercambiar y adquirir artículos exclusivos.
-              </p>
-            </div>
-
-            {/* TAGS */}
-            <div className="flex flex-wrap gap-2 pt-3">
-              <span className="text-xs border border-white/20 px-3 py-1 rounded-full text-white/60">
-                Álbumes
-              </span>
-              <span className="text-xs border border-white/20 px-3 py-1 rounded-full text-white/60">
-                Anime
-              </span>
-              <span className="text-xs border border-white/20 px-3 py-1 rounded-full text-white/60">
-                Coleccionables
-              </span>
-            </div>
-
-            {/* CTA WHATSAPP */}
-            <div className="pt-6 space-y-3">
-              <p className="text-white/70 text-sm">
-                ¿Quieres conocer más productos y sobre el emprendimiento? Escríbenos.
-              </p>
-
-              <a
-                href="https://wa.me/593987194178"
-                target="_blank"
-                className="inline-block px-6 py-3 border border-green-400 text-green-300 hover:bg-green-400 hover:text-black transition tracking-wide"
+          {mobileStep === "entrepreneurs" && (
+            <div>
+              <button
+                onClick={() => setMobileStep("categories")}
+                className="mb-4 border border-red-700 px-4 py-2 bg-black/70"
               >
-                ESCRIBIR POR WHATSAPP
-              </a>
-            </div>
+                ← Regresar
+              </button>
 
-          </motion.div>
-
-          {/* DERECHA */}
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            className="flex justify-center"
-          >
-
-            <div className="w-full max-w-md relative">
-
-              <img
-                src="/images/emprendedor-chulla-q.png"
-                alt="Chulla Q Emprendedor"
-                className="w-full object-cover rounded-xl"
+              <EntrepreneurList
+                entrepreneurs={entrepreneurs}
+                selected={selectedEntrepreneur}
+                setSelected={(value: number) => {
+                  setSelectedEntrepreneur(value);
+                  setMobileStep("details");
+                }}
+                active={true}
               />
-
-              <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent rounded-xl" />
             </div>
+          )}
 
-          </motion.div>
+          {mobileStep === "details" && (
+            <div>
+              <button
+                onClick={() => setMobileStep("entrepreneurs")}
+                className="mb-4 border border-red-700 px-4 py-2 bg-black/70"
+              >
+                ← Volver
+              </button>
 
+              {currentEntrepreneur && (
+                <EntrepreneurPanel entrepreneur={currentEntrepreneur} />
+              )}
+            </div>
+          )}
         </div>
 
-      </div>
+        {/* DESKTOP */}
+        <div className="hidden md:grid grid-cols-[240px_260px_1fr] xl:grid-cols-[320px_320px_1fr] gap-3 h-[calc(100vh-120px)]">
+
+          <CategoryMenu
+            categories={categories}
+            selected={selectedCategory}
+            setSelected={setSelectedCategory}
+            active={menuLevel === "category"}
+          />
+
+          <EntrepreneurList
+            entrepreneurs={entrepreneurs}
+            selected={selectedEntrepreneur}
+            setSelected={setSelectedEntrepreneur}
+            active={menuLevel === "entrepreneur"}
+          />
+
+          {currentEntrepreneur && (
+            <EntrepreneurPanel entrepreneur={currentEntrepreneur} />
+          )}
+
+        </div>
+      </main>
     </section>
   );
 }
