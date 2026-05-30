@@ -38,3 +38,6 @@
     ),
     rgba(0,0,0,.78);
 }
+:root {
+  --font-anime: "Teko";
+}
