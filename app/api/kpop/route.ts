@@ -27,7 +27,7 @@ export async function POST(req: Request) {
     });
 
     await transporter.sendMail({
-      from: `"Q-ASIAN FEST" <${process.env.EMAIL_USER}>`,
+      from: `"Q-ASIAN FEST " <${process.env.EMAIL_USER}>`,
       to: process.env.EMAIL_RECEIVER,
       subject: "💜 Nueva inscripción K-POP DANCE",
       html: `
