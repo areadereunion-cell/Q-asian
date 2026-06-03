@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import { Inter, Teko } from "next/font/google";
 
 import "./globals.css";
+
 import Navbar from "@/components/navbar/Navbar";
+import Footer from "@/app/informacion/components/footer/footer";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -20,12 +22,11 @@ const teko = Teko({
   variable: "--font-anime",
 });
 
-export const metadata: Metadata =
-  {
-    title: "Q-Asian Fest",
-    description:
-      "Evento de anime y cultura asiática",
-  };
+export const metadata: Metadata = {
+  title: "Q-Asian Fest",
+  description:
+    "Evento de anime y cultura asiática",
+};
 
 export default function RootLayout({
   children,
@@ -38,18 +39,28 @@ export default function RootLayout({
         className={`
           ${inter.variable}
           ${teko.variable}
+          min-h-screen
           bg-[#050816]
           text-white
           overflow-x-hidden
           font-[family-name:var(--font-body)]
+          flex
+          flex-col
         `}
       >
+        {/* NAVBAR GLOBAL */}
         <Navbar />
 
-        {/* spacer navbar */}
-        <div className="h-24" />
+        {/* ESPACIO NAVBAR */}
+        <div className="h-24 shrink-0" />
 
-        {children}
+        {/* CONTENIDO */}
+        <main className="flex-1 w-full">
+          {children}
+        </main>
+
+        {/* FOOTER GLOBAL */}
+        <Footer />
       </body>
     </html>
   );

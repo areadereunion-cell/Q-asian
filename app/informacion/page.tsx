@@ -21,7 +21,7 @@ export default function Page() {
       <Horasection />
       <Contactsection/>
       <Mapasection/>
-      <Footer/>
+
     </main>
   );
 }

@@ -1,139 +1,347 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import {
+  motion,
+  AnimatePresence,
+} from "framer-motion";
 
 export default function AboutSection() {
   const [open, setOpen] = useState(false);
 
-  return (
-    <section className="relative w-full overflow-hidden py-8">
+  const items = [
+    "🎌 Cosplay y concursos",
+    "🎮 Zona gamer",
+    "🎤 Shows en vivo",
+    "🛍 Experiencias interactivas",
+  ];
 
-      {/* FONDO */}
-      <div
-        className={`absolute inset-0 bg-black transition-opacity duration-700 ${
-          open ? "opacity-0" : "opacity-100"
-        }`}
+  return (
+    <section className="relative min-h-[90vh] w-full overflow-hidden bg-black">
+      {/* BACKGROUND */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black via-[#070707] to-black" />
+
+      {/* RED GLOW */}
+      <motion.div
+        animate={{
+          opacity: [0.2, 0.45, 0.2],
+          scale: [1, 1.08, 1],
+        }}
+        transition={{
+          duration: 5,
+          repeat: Infinity,
+        }}
+        className="
+          absolute
+          top-1/2
+          left-1/2
+          -translate-x-1/2
+          -translate-y-1/2
+          w-[700px]
+          h-[700px]
+          rounded-full
+          bg-[#ff3b30]/10
+          blur-[140px]
+        "
       />
 
-      {open && (
-        <div className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden">
-          <iframe
-            className="w-full h-full scale-125"
-            src="https://www.youtube-nocookie.com/embed/XWhtXOvj3Yo?autoplay=1&mute=1&loop=1&playlist=XWhtXOvj3Yo&controls=0&modestbranding=1&rel=0"
-            allow="autoplay; encrypted-media"
-          />
-        </div>
-      )}
+      {/* VIDEO */}
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{
+              opacity: 0,
+              scale: 1.15,
+            }}
+            animate={{
+              opacity: 1,
+              scale: 1,
+            }}
+            exit={{
+              opacity: 0,
+            }}
+            className="
+              absolute
+              inset-0
+              pointer-events-none
+            "
+          >
+            <iframe
+              className="
+                w-full
+                h-full
+                scale-[1.25]
+                opacity-40
+              "
+              src="https://www.youtube-nocookie.com/embed/XWhtXOvj3Yo?autoplay=1&mute=1&loop=1&playlist=XWhtXOvj3Yo&controls=0"
+              allow="autoplay"
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
 
-      <div className="absolute inset-0 bg-black/60" />
+      {/* OVERLAY */}
+      <div className="absolute inset-0 bg-black/55 backdrop-blur-[1px]" />
 
-      {/* CONTENEDOR */}
-      <div className="relative z-10 w-full max-w-6xl mx-auto px-4">
+      <div className="relative z-10 min-h-[90vh] flex items-center justify-center px-6">
+        <AnimatePresence mode="wait">
+          {!open ? (
+            <motion.div
+              key="closed"
+              initial={{
+                opacity: 0,
+              }}
+              animate={{
+                opacity: 1,
+              }}
+              exit={{
+                opacity: 0,
+              }}
+              className="
+                flex
+                flex-col
+                items-center
+                text-center
+              "
+            >
+              {/* TITLE */}
+              <motion.h2
+                initial={{
+                  y: 30,
+                  opacity: 0,
+                }}
+                animate={{
+                  y: 0,
+                  opacity: 1,
+                }}
+                className="
+                  text-4xl
+                  md:text-7xl
+                  font-black
+                  text-white
+                  uppercase
+                "
+                style={{
+                  fontFamily:
+                    "var(--font-anime)",
+                }}
+              >
+                ¿QUIERES SABER
+                <span className="text-[#ff3b30]">
+                  {" "}QUIÉNES SOMOS?
+                </span>
+              </motion.h2>
 
-        {/* 🔥 MOBILE: STACK VERTICAL */}
-        <div className="flex flex-col md:grid md:grid-cols-2 items-center gap-10">
+              <p className="text-white/60 mt-5 max-w-xl">
+                Toca a Nani y descubre
+                el origen del universo
+                Q-ASIAN FEST.
+              </p>
 
-          {/* ================= TEXTO INTRO ================= */}
-          <div className="flex items-center justify-center text-center md:text-left">
-
-            <AnimatePresence mode="wait">
-
-              {!open ? (
-                <motion.div
-                  key="intro"
-                  initial={{ opacity: 0, y: 15 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="text-white space-y-3 max-w-md"
-                >
-                  <h2 className="text-2xl md:text-4xl font-bold leading-tight">
-                    ¿Quieres saber quiénes somos?
-                  </h2>
-
-                  <p className="text-white/70 text-sm md:text-base">
-                    Da click en Nani para descubrir la historia del evento
-                  </p>
-
-                  <p className="text-white/50 text-xs md:text-sm leading-relaxed">
-                    Una experiencia creada para unir la cultura anime, el gaming y la comunidad juvenil en un solo espacio lleno de creatividad, música y entretenimiento.
-                  </p>
-                </motion.div>
-              ) : (
-                <motion.img
-                  key="nani-left"
-                  src="/images/nani-ok.png"
-                  alt="Nani OK"
-                  initial={{ opacity: 0, x: -100 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.7 }}
-                  className="w-40 md:w-64 mx-auto"
+              {/* NANI */}
+              <motion.button
+                onClick={() =>
+                  setOpen(true)
+                }
+                animate={{
+                  y: [0, -18, 0],
+                }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+                whileHover={{
+                  scale: 1.06,
+                }}
+                whileTap={{
+                  scale: 0.95,
+                }}
+                className="
+                  relative
+                  mt-12
+                "
+              >
+                {/* GLOW */}
+                <div
+                  className="
+                    absolute
+                    inset-0
+                    rounded-full
+                    bg-[#ff3b30]/20
+                    blur-[90px]
+                  "
                 />
-              )}
 
-            </AnimatePresence>
+                <img
+                  src="/images/nani.png"
+                  alt="Nani"
+                  className="
+                    relative
+                    w-52
+                    md:w-80
+                    drop-shadow-[0_0_40px_rgba(255,59,48,.35)]
+                  "
+                />
 
-          </div>
-
-          {/* ================= NANI / INFO ================= */}
-          <div className="flex items-center justify-center">
-
-            <AnimatePresence mode="wait">
-
-              {!open ? (
-                <motion.button
-                  key="nani-click"
-                  onClick={() => setOpen(true)}
-                  whileTap={{ scale: 0.95 }}
-                  className="flex flex-col items-center"
+                <motion.p
+                  animate={{
+                    opacity: [
+                      0.4,
+                      1,
+                      0.4,
+                    ],
+                  }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                  }}
+                  className="
+                    text-white/70
+                    text-sm
+                    tracking-[0.3em]
+                    uppercase
+                    mt-4
+                  "
                 >
-                  <img
-                    src="/images/nani.png"
-                    alt="Nani"
-                    className="w-40 md:w-64"
-                  />
+                  Click en Nani
+                </motion.p>
+              </motion.button>
+            </motion.div>
+          ) : (
+            <motion.div
+              key="open"
+              initial={{
+                opacity: 0,
+                y: 40,
+              }}
+              animate={{
+                opacity: 1,
+                y: 0,
+              }}
+              className="
+                grid
+                lg:grid-cols-2
+                gap-16
+                items-center
+                max-w-7xl
+                w-full
+              "
+            >
+              {/* LEFT */}
+              <motion.div
+                initial={{
+                  x: -80,
+                  opacity: 0,
+                }}
+                animate={{
+                  x: 0,
+                  opacity: 1,
+                }}
+                className="
+                  flex
+                  justify-center
+                "
+              >
+                <img
+                  src="/images/nani-ok.png"
+                  alt=""
+                  className="
+                    w-72
+                    md:w-[420px]
+                    drop-shadow-[0_0_70px_rgba(255,59,48,.25)]
+                  "
+                />
+              </motion.div>
 
-                  <p className="text-white/80 text-xs md:text-sm mt-2">
-                    Da click en Nani
-                  </p>
-                </motion.button>
-              ) : (
-                <motion.div
-                  key="info"
-                  initial={{ opacity: 0, x: 50 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  className="text-white space-y-4 text-center md:text-left max-w-md"
+              {/* RIGHT */}
+              <motion.div
+                initial={{
+                  x: 80,
+                  opacity: 0,
+                }}
+                animate={{
+                  x: 0,
+                  opacity: 1,
+                }}
+                className="
+                  backdrop-blur-xl
+                  border
+                  border-white/10
+                  bg-white/[0.03]
+                  p-8
+                  md:p-12
+                "
+              >
+                <span className="text-[#ff3b30] tracking-[0.4em] text-xs uppercase">
+                  Universo Q-Asian
+                </span>
+
+                <h3
+                  className="
+                    text-5xl
+                    font-black
+                    text-white
+                    mt-4
+                  "
                 >
-                  <h3 className="text-2xl md:text-3xl font-bold">
-                    Q-Asian Fest
-                  </h3>
+                  Q-ASIAN FEST
+                </h3>
 
-                  <div className="w-12 md:w-16 h-1 bg-white/30 rounded-full mx-auto md:mx-0" />
+                <div className="w-20 h-[3px] bg-[#ff3b30] mt-6 mb-8" />
 
-                  <p className="text-white/90 text-sm md:text-base leading-relaxed">
-                    El <b>Q-Asian Fest</b> es un evento cultural inspirado en el anime, el gaming y la cultura asiática moderna, diseñado para conectar a la comunidad juvenil con experiencias únicas.
-                  </p>
+                <p className="text-white/80 leading-relaxed">
+                  Evento cultural inspirado
+                  en anime, gaming y cultura
+                  asiática moderna diseñado
+                  para conectar comunidades.
+                </p>
 
-                  <p className="text-white/80 text-sm md:text-base leading-relaxed">
-                    Organizado por la <b>Administración Zonal Quitumbe</b>, busca crear un espacio seguro y creativo donde el arte, la música y la cultura pop se encuentren.
-                  </p>
+                <p className="text-white/60 mt-5 leading-relaxed">
+                  Un espacio lleno de música,
+                  cosplay, shows y experiencias
+                  inmersivas.
+                </p>
 
-                  <div className="text-white/60 text-xs md:text-sm space-y-1">
-                    <p>🎌 Cosplay y concursos</p>
-                    <p>🎮 Zona gamer</p>
-                    <p>🎤 Shows en vivo</p>
-                    <p>🛍 Experiencias interactivas</p>
-                  </div>
-                </motion.div>
-              )}
-
-            </AnimatePresence>
-
-          </div>
-
-        </div>
-
+                {/* FEATURES */}
+                <div className="grid grid-cols-2 gap-4 mt-10">
+                  {items.map(
+                    (item, index) => (
+                      <motion.div
+                        key={item}
+                        initial={{
+                          opacity: 0,
+                          y: 20,
+                        }}
+                        animate={{
+                          opacity: 1,
+                          y: 0,
+                        }}
+                        transition={{
+                          delay:
+                            index * 0.12,
+                        }}
+                        className="
+                          border
+                          border-white/10
+                          bg-white/[0.04]
+                          p-4
+                          text-white/80
+                          text-sm
+                          hover:border-[#ff3b30]/40
+                          transition-all
+                        "
+                      >
+                        {item}
+                      </motion.div>
+                    )
+                  )}
+                </div>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
-
     </section>
   );
 }
