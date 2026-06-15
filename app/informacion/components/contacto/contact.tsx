@@ -28,18 +28,18 @@ const activities = [
 
 export default function ActivitiesSection() {
   return (
-    <section className="relative w-full overflow-hidden bg-white py-32">
+    <section className="relative isolate w-full overflow-hidden bg-white mt-32 pt-56 md:pt-64 pb-32 md:pb-40">
 
-      {/* FONDO */}
+      {/* BACKGROUNDS */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,0,0,0.08),transparent_45%)]" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,rgba(255,120,0,0.08),transparent_35%)]" />
 
-      {/* TEXTO GIGANTE DE FONDO */}
-      <h1 className="absolute left-1/2 top-20 -translate-x-1/2 text-[120px] md:text-[240px] font-black text-black/[0.03] tracking-[-10px] pointer-events-none select-none whitespace-nowrap">
+      {/* BIG TITLE BACKGROUND */}
+      <h1 className="absolute left-1/2 top-10 -translate-x-1/2 text-[70px] md:text-[240px] font-black text-black/[0.03] tracking-[-6px] md:tracking-[-10px] pointer-events-none select-none whitespace-nowrap">
         ACTIVITIES
       </h1>
 
-      <div className="relative z-10 w-full">
+      <div className="relative z-10 max-w-7xl mx-auto px-5 md:px-8">
 
         {/* HEADER */}
         <motion.div
@@ -47,45 +47,39 @@ export default function ActivitiesSection() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
           viewport={{ once: true }}
-          className="w-full flex flex-col items-center text-center px-6 mb-24"
+          className="text-center mb-14 md:mb-24"
         >
-          <p className="uppercase tracking-[0.4em] text-red-500 font-bold text-sm">
+          <p className="uppercase tracking-[0.35em] text-red-500 font-bold text-xs md:text-sm">
             EVENT EXPERIENCE
           </p>
 
-          <h2 className="text-5xl md:text-7xl lg:text-[110px] font-black text-black mt-6 leading-[0.9]">
-            Actividades del
-            <br />
+          <h2 className="text-4xl md:text-7xl lg:text-[110px] font-black text-black mt-5 leading-[1]">
+            Actividades del{" "}
             <span className="bg-gradient-to-r from-red-600 via-orange-500 to-yellow-500 text-transparent bg-clip-text">
               Q-Asian Fest
             </span>
           </h2>
 
-          {/* TEXTO BIEN CENTRADO */}
-          <div className="w-full flex justify-center mt-8">
-            <p className="text-black/60 text-lg md:text-[28px] leading-relaxed text-center max-w-[900px]">
-              Una experiencia completa con competencias, espectáculos y
-              actividades diseñadas para la comunidad anime, gaming y cultura
-              asiática.
-            </p>
-          </div>
+          <p className="text-black/60 text-sm md:text-[22px] leading-relaxed max-w-[900px] mx-auto mt-6">
+            Una experiencia completa con competencias, espectáculos y actividades
+            diseñadas para la comunidad anime, gaming y cultura asiática.
+          </p>
         </motion.div>
 
-        {/* CARDS FULL WIDTH */}
-        <div className="w-full flex flex-col lg:flex-row">
+        {/* CARDS */}
+        <div className="flex flex-col md:flex-row gap-6 md:gap-0">
 
           {activities.map((activity, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 50 }}
+              initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.15 }}
               viewport={{ once: true }}
-              whileHover={{ flex: 1.25 }}
-              className="group relative h-[700px] flex-1 overflow-hidden cursor-pointer transition-all duration-700"
+              className="group relative w-full md:flex-1 h-[380px] md:h-[700px] overflow-hidden"
             >
 
-              {/* IMAGEN PNG */}
+              {/* IMAGE */}
               <img
                 src={activity.image}
                 alt={activity.title}
@@ -97,37 +91,36 @@ export default function ActivitiesSection() {
 
               {/* GLOW */}
               <div
-                className={`absolute inset-0 bg-gradient-to-t ${activity.glow} via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-500`}
+                className={`absolute inset-0 bg-gradient-to-t ${activity.glow} via-transparent to-transparent opacity-70 md:opacity-0 md:group-hover:opacity-100 transition duration-500`}
               />
 
-              {/* NUMERO */}
-              <div className="absolute top-10 right-10 text-white/10 text-[120px] font-black leading-none">
+              {/* NUMBER */}
+              <div className="absolute top-4 right-4 md:top-10 md:right-10 text-white/10 text-[80px] md:text-[120px] font-black">
                 0{index + 1}
               </div>
 
-              {/* CONTENIDO */}
-              <div className="relative z-10 h-full flex flex-col justify-end p-10 md:p-14">
+              {/* CONTENT */}
+              <div className="relative z-10 h-full flex flex-col justify-end p-6 md:p-14">
 
-                <p className="uppercase tracking-[0.3em] text-white/70 text-sm mb-5">
+                <p className="uppercase tracking-[0.3em] text-white/70 text-[10px] md:text-sm mb-3 md:mb-5">
                   EVENT ACTIVITY
                 </p>
 
-                <h3 className="text-white text-4xl md:text-5xl font-black leading-tight mb-5">
+                <h3 className="text-white text-2xl md:text-5xl font-black leading-tight mb-3 md:mb-5">
                   {activity.title}
                 </h3>
 
-                <p className="text-white/75 text-lg max-w-md leading-relaxed">
+                <p className="text-white/75 text-sm md:text-lg max-w-md">
                   {activity.subtitle}
                 </p>
 
-                {/* CTA */}
-                <div className="mt-8 flex items-center gap-4 text-white font-semibold group-hover:translate-x-3 transition duration-500">
+                <div className="mt-6 md:mt-8 flex items-center gap-3 text-white font-semibold text-sm md:text-base">
                   <span>Explorar actividad</span>
-                  <span className="text-2xl">→</span>
+                  <span className="text-xl md:text-2xl">→</span>
                 </div>
               </div>
 
-              {/* BORDE HOVER */}
+              {/* BORDER */}
               <div className="absolute inset-0 border border-white/0 group-hover:border-white/20 transition duration-500" />
             </motion.div>
           ))}

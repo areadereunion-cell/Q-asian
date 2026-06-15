@@ -6,96 +6,259 @@ import { useRouter } from "next/navigation";
 export default function EntrepreneursSection() {
   const router = useRouter();
 
+  const tags = [
+    "Anime",
+    "Cosplay",
+    "Gaming",
+    "K-Pop",
+    "Arte",
+    "Merch",
+  ];
+
   return (
-    <section className="relative overflow-hidden py-28 lg:py-36">
+    <section
+      className="
+        relative
+        overflow-hidden
+        bg-[#f6f1e7]
 
-      {/* Background */}
-      <div className="absolute inset-0 bg-[#0d0d0d]" />
+        mt-20
+        mb-24
+        md:mt-32
+        md:mb-36
 
-      <div className="absolute inset-0 bg-gradient-to-b from-[#ff5b1f]/10 via-transparent to-transparent" />
+        pt-20
+        pb-44
+        md:pt-32
+        md:pb-56
+      "
+    >
+      {/* HALFTONE MANGA */}
+      <div
+        className="
+          absolute
+          inset-0
+          opacity-[0.05]
+          bg-[radial-gradient(circle,#000_1px,transparent_1.6px)]
+          bg-[size:16px_16px]
+        "
+      />
 
-      {/* Glow */}
-      <div className="absolute top-24 left-1/2 -translate-x-1/2 w-[900px] h-[300px] bg-[#ff5b1f]/10 blur-[140px]" />
+      {/* SPEED LINES */}
+      <div
+        className="
+          absolute
+          inset-0
+          opacity-[0.03]
+          bg-[linear-gradient(120deg,transparent_0%,transparent_47%,#000_48%,transparent_49%,transparent_100%)]
+          bg-[length:28px_28px]
+        "
+      />
 
-      {/* Texture */}
-      <div className="absolute inset-0 opacity-[0.025] bg-[url('/images/grain.png')]" />
+      {/* MANGA FRAME */}
+      <div className="absolute inset-3 md:inset-6 border-[3px] md:border-[5px] border-black pointer-events-none" />
 
-      {/* Lines */}
-      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#ff5b1f]/40 to-transparent" />
+      {/* TOP DECOR */}
+      <motion.div
+        animate={{
+          rotate: [-2, 2, -2],
+        }}
+        transition={{
+          duration: 5,
+          repeat: Infinity,
+        }}
+        className="
+          absolute
+          top-4
+          right-3
+          md:top-8
+          md:right-14
 
-      <div className="relative z-10 w-full flex justify-center px-6">
+          bg-[#ff5b1f]
+          border-[3px]
+          md:border-[4px]
+          border-black
 
-        {/* CONTENEDOR CENTRADO REAL */}
+          px-3
+          py-1
+          md:px-5
+          md:py-2
+
+          rotate-[-6deg]
+
+          shadow-[4px_4px_0px_#000]
+          md:shadow-[8px_8px_0px_#000]
+
+          z-20
+        "
+      >
+        <span
+          className="
+            text-black
+            font-black
+            uppercase
+            tracking-[0.15em]
+            text-[10px]
+            md:text-xs
+          "
+        >
+          NEW ZONE!
+        </span>
+      </motion.div>
+
+      <div className="relative z-10 px-5 md:px-6 flex justify-center">
         <motion.div
           initial={{
             opacity: 0,
-            y: 20,
+            y: 40,
           }}
           whileInView={{
             opacity: 1,
             y: 0,
           }}
+          viewport={{
+            once: true,
+          }}
           transition={{
-            duration: 0.5,
+            duration: 0.6,
           }}
           className="
             w-full
-            max-w-[980px]
+            max-w-[1100px]
             flex
             flex-col
             items-center
             text-center
           "
         >
-          {/* Badge */}
+          {/* BADGE */}
           <div
             className="
-              border
-              border-[#ff5b1f]/20
-              bg-[#ff5b1f]/5
+              bg-black
+              border-[3px]
+              md:border-[4px]
+              border-black
+
               px-5
               py-2
-              mb-8
+              md:px-6
+              md:py-3
+
+              rotate-[-2deg]
+
+              shadow-[4px_4px_0px_#ff5b1f]
+              md:shadow-[6px_6px_0px_#ff5b1f]
             "
           >
-            <span className="text-[#ffb69f] uppercase text-[11px] tracking-[0.4em]">
+            <span
+              className="
+                text-white
+                uppercase
+                text-[10px]
+                md:text-[11px]
+                tracking-[0.3em]
+                font-bold
+              "
+            >
               Emprendedores Oficiales
             </span>
           </div>
 
-          {/* Título */}
+          {/* TITLE */}
           <h2
             className="
-              text-[4rem]
-              sm:text-[5rem]
-              md:text-[6rem]
+              mt-10
+
+              text-[2.8rem]
+              sm:text-[4rem]
+              md:text-[5.5rem]
               lg:text-[7rem]
+
+              leading-[0.9]
               font-black
               uppercase
-              leading-[0.88]
-              text-center
-              text-white
+              text-black
             "
             style={{
-              fontFamily:
-                "Teko, sans-serif",
+              fontFamily: "Teko, sans-serif",
+              WebkitTextStroke: "2px black",
+              textShadow: "4px 4px 0px #ff5b1f",
             }}
           >
-            Emprendedores
-            <span className="block text-[#ff6a3d]">
-              del festival
+            EMPRENDEDORES
+
+            <span className="block text-[#ff5b1f]">
+              DEL FESTIVAL
             </span>
           </h2>
 
-          {/* Divider */}
-          <div className="w-28 h-[2px] bg-[#ff5b1f] my-10" />
+          {/* MANGA CARD */}
+          <div
+            className="
+              relative
+              mt-10
 
-          {/* Texto */}
-          <div className="w-full max-w-[760px]">
-            <p className="text-white/80 text-lg md:text-[21px] leading-[1.9]">
+              w-full
+              max-w-[860px]
+
+              bg-white
+              border-[4px]
+              md:border-[5px]
+              border-black
+
+              p-6
+              sm:p-8
+              md:p-12
+
+              shadow-[6px_6px_0px_#000]
+              md:shadow-[12px_12px_0px_#000]
+            "
+          >
+            {/* WOW STICKER */}
+            <div
+              className="
+                absolute
+                -top-5
+                left-4
+                md:-top-6
+                md:-left-4
+
+                bg-[#ff5b1f]
+                border-[3px]
+                md:border-[4px]
+                border-black
+
+                px-3
+                py-1
+                md:px-4
+                md:py-2
+
+                rotate-[-6deg]
+
+                font-black
+                text-black
+                text-[10px]
+                md:text-sm
+                uppercase
+              "
+            >
+              WOW!
+            </div>
+
+            <p
+              className="
+                text-black
+                text-base
+                sm:text-lg
+                md:text-[22px]
+
+                leading-[1.9]
+                font-medium
+              "
+            >
               En el{" "}
-              <span className="text-[#ffae92] font-medium">
-                Q-Asian Fest
+              <span className="font-black text-[#ff5b1f]">
+                Q-ASIAN FEST
               </span>
               , los emprendedores forman una
               parte esencial de la experiencia.
@@ -105,7 +268,16 @@ export default function EntrepreneursSection() {
               cultura asiática.
             </p>
 
-            <p className="mt-6 text-white/55 text-base md:text-lg leading-[2]">
+            <p
+              className="
+                mt-6
+                text-black/70
+                text-sm
+                sm:text-base
+                md:text-lg
+                leading-[2]
+              "
+            >
               Descubre accesorios,
               ilustraciones, ropa temática,
               coleccionables, comida y
@@ -114,67 +286,109 @@ export default function EntrepreneursSection() {
             </p>
           </div>
 
-          {/* Tags */}
-          <div className="flex flex-wrap justify-center gap-3 mt-10">
-            {[
-              "Anime",
-              "Cosplay",
-              "Gaming",
-              "K-Pop",
-              "Arte",
-              "Merch",
-            ].map((item) => (
-              <div
+          {/* TAGS */}
+          <div
+            className="
+              flex
+              flex-wrap
+              justify-center
+
+              gap-3
+              md:gap-4
+
+              mt-20
+              md:mt-24
+
+              px-4
+
+              relative
+              z-20
+            "
+          >
+            {tags.map((item) => (
+              <motion.div
                 key={item}
+                whileHover={{
+                  y: -4,
+                  rotate: -2,
+                }}
                 className="
-                  px-5
-                  py-3
-                  border
-                  border-white/10
-                  bg-white/[0.03]
-                  text-white/75
-                  text-xs
+                  px-4
+                  py-2
+                  md:px-5
+                  md:py-3
+
+                  bg-white
+                  border-[3px]
+                  md:border-[4px]
+                  border-black
+
+                  text-black
+                  text-[10px]
+                  md:text-xs
+                  font-bold
                   uppercase
-                  tracking-[0.2em]
+                  tracking-[0.15em]
+
+                  shadow-[4px_4px_0px_#000]
+                  md:shadow-[5px_5px_0px_#000]
+
+                  cursor-default
                 "
               >
                 {item}
-              </div>
+              </motion.div>
             ))}
           </div>
 
-          {/* Button */}
+          {/* BUTTON */}
           <motion.button
             whileHover={{
-              scale: 1.03,
-              y: -2,
+              scale: 1.04,
+              rotate: -1,
             }}
             whileTap={{
-              scale: 0.98,
+              scale: 0.96,
             }}
             onClick={() =>
-              router.push(
-                "/emprendedores"
-              )
+              router.push("/emprendedores")
             }
             className="
-              mt-12
-              px-9
+              relative
+
+              mt-14
+              md:mt-16
+
+              px-8
               py-4
+              md:px-12
+              md:py-6
+
               bg-[#ff5b1f]
-              border
-              border-[#ff8b66]
-              text-white
+              border-[4px]
+              md:border-[5px]
+              border-black
+
+              text-black
               uppercase
-              text-sm
-              font-semibold
-              tracking-[0.24em]
-              hover:bg-[#ff6933]
+              text-xs
+              md:text-base
+              font-black
+              tracking-[0.2em]
+
+              shadow-[6px_6px_0px_#000]
+              md:shadow-[10px_10px_0px_#000]
+
               transition-all
+
+              z-10
             "
           >
-            Explorar emprendedores
+            ✦ EXPLORAR EMPRENDEDORES ✦
           </motion.button>
+
+          {/* EXTRA SPACE MOBILE */}
+          <div className="h-20 md:h-0" />
         </motion.div>
       </div>
     </section>

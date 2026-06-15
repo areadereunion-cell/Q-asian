@@ -17,7 +17,19 @@ export default function AboutSection() {
   ];
 
   return (
-    <section className="relative min-h-[90vh] w-full overflow-hidden bg-black">
+<section
+  className="
+    relative
+    min-h-[90vh]
+    w-full
+    overflow-hidden
+    bg-black
+    pt-24
+    pb-56
+    md:pt-32
+    md:pb-72
+  "
+>
       {/* BACKGROUND */}
       <div className="absolute inset-0 bg-gradient-to-b from-black via-[#070707] to-black" />
 
@@ -83,7 +95,18 @@ export default function AboutSection() {
       {/* OVERLAY */}
       <div className="absolute inset-0 bg-black/55 backdrop-blur-[1px]" />
 
-      <div className="relative z-10 min-h-[90vh] flex items-center justify-center px-6">
+      <div
+        className="
+          relative
+          z-10
+          min-h-[115vh]
+          md:min-h-[90vh]
+          flex
+          items-center
+          justify-center
+          px-6
+        "
+      >
         <AnimatePresence mode="wait">
           {!open ? (
             <motion.div

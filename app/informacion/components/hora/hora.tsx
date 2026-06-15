@@ -4,271 +4,126 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
 export default function CountdownSection() {
-  const targetDate = new Date(
-    "2026-07-04T08:00:00"
-  ).getTime();
+  const targetDate = new Date("2026-07-04T08:00:00").getTime();
 
-  const [timeLeft, setTimeLeft] =
-    useState({
-      days: 0,
-      hours: 0,
-      minutes: 0,
-      seconds: 0,
-    });
+  const [timeLeft, setTimeLeft] = useState({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+  });
 
   useEffect(() => {
     const interval = setInterval(() => {
-      const now =
-        new Date().getTime();
-
-      const distance =
-        targetDate - now;
+      const now = new Date().getTime();
+      const distance = targetDate - now;
 
       setTimeLeft({
-        days: Math.max(
-          Math.floor(
-            distance /
-              (1000 *
-                60 *
-                60 *
-                24)
-          ),
-          0
-        ),
-        hours: Math.max(
-          Math.floor(
-            (distance /
-              (1000 *
-                60 *
-                60)) %
-              24
-          ),
-          0
-        ),
-        minutes: Math.max(
-          Math.floor(
-            (distance /
-              (1000 * 60)) %
-              60
-          ),
-          0
-        ),
-        seconds: Math.max(
-          Math.floor(
-            (distance /
-              1000) %
-              60
-          ),
-          0
-        ),
+        days: Math.max(Math.floor(distance / (1000 * 60 * 60 * 24)), 0),
+        hours: Math.max(Math.floor((distance / (1000 * 60 * 60)) % 24), 0),
+        minutes: Math.max(Math.floor((distance / (1000 * 60)) % 60), 0),
+        seconds: Math.max(Math.floor((distance / 1000) % 60), 0),
       });
     }, 1000);
 
-    return () =>
-      clearInterval(interval);
-  }, []);
+    return () => clearInterval(interval);
+  }, [targetDate]);
+
+  const month = {
+    name: "7月",
+    days: 31,
+    start: 3,
+  };
+
+  const weekDays = ["L", "M", "X", "J", "V", "S", "D"];
+
+  // ✅ FIX: ya NO usar JSX.Element[]
+  const cells = [];
+
+  for (let i = 0; i < month.start; i++) {
+    cells.push(<div key={`empty-${i}`} />);
+  }
+
+  for (let day = 1; day <= month.days; day++) {
+    const isEventDay = day === 4 || day === 5;
+
+    cells.push(
+      <div
+        key={day}
+        className={`
+          w-7 h-7 md:w-8 md:h-8
+          flex items-center justify-center
+          text-[11px] md:text-xs
+          mx-auto
+          transition-all
+          ${
+            isEventDay
+              ? "bg-[#c90000] text-white rounded-full font-bold shadow-md"
+              : "text-black/70"
+          }
+        `}
+      >
+        {day}
+      </div>
+    );
+  }
 
   return (
-    <section className="relative min-h-[85vh] overflow-hidden flex items-center justify-center">
-
-      {/* Fondo */}
+    <section className="relative overflow-hidden pt-24 pb-40">
+      {/* BACKGROUND */}
       <div
         className="absolute inset-0 bg-cover bg-center"
-        style={{
-          backgroundImage:
-            "url('/images/sakura-leaves.gif')",
-        }}
+        style={{ backgroundImage: "url('/images/tatami.jpg')" }}
       />
+      <div className="absolute inset-0 bg-black/60" />
 
-      <div className="absolute inset-0 bg-black/55" />
-      <div className="absolute inset-0 bg-gradient-to-b from-[#3a1010]/20 via-black/10 to-black/75" />
-
-      <div className="relative z-10 w-full max-w-6xl px-6">
-
-        {/* HEADER */}
+      <div className="relative z-10 max-w-5xl mx-auto px-4">
         <motion.div
-          initial={{
-            opacity: 0,
-            y: 15,
-          }}
-          whileInView={{
-            opacity: 1,
-            y: 0,
-          }}
-          className="text-center mb-14"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          className="bg-[#f6f4ef] border-[3px] border-black shadow-[8px_8px_0px_#000] p-6"
         >
-          <p className="text-[#ffb5b5] text-sm tracking-[0.35em] uppercase">
-            Evento Oficial
-          </p>
+          {/* COUNTDOWN */}
+          <div className="flex justify-center gap-6 mb-10 text-black">
+            {[
+              { label: "DÍAS", value: timeLeft.days },
+              { label: "HORAS", value: timeLeft.hours },
+              { label: "MIN", value: timeLeft.minutes },
+              { label: "SEG", value: timeLeft.seconds },
+            ].map((t, i) => (
+              <div key={i} className="text-center">
+                <h2 className="text-5xl md:text-7xl leading-none font-serif">
+                  {String(t.value).padStart(2, "0")}
+                </h2>
+                <span className="text-[10px] tracking-[0.3em] text-black/60">
+                  {t.label}
+                </span>
+              </div>
+            ))}
+          </div>
 
-          <h2
-            className="
-              text-5xl
-              md:text-7xl
-              text-white
-              font-black
-              leading-none
-            "
-            style={{
-              fontFamily:
-                "Teko, sans-serif",
-            }}
-          >
-            Q-ASIAN FEST
-          </h2>
+          {/* CALENDAR */}
+          <div>
+            <h3 className="text-center text-2xl mb-3 text-black/80">
+              {month.name}
+            </h3>
 
-          <p className="text-white/60 text-sm md:text-base mt-2">
-            Anime • Cosplay • K-Pop • Cultura Asiática
+            <div className="grid grid-cols-7 text-center text-[10px] mb-2 text-black/50">
+              {weekDays.map((d) => (
+                <div key={d}>{d}</div>
+              ))}
+            </div>
+
+            <div className="grid grid-cols-7 gap-y-2 justify-items-center">
+              {cells}
+            </div>
+          </div>
+
+          {/* FOOTER */}
+          <p className="text-center mt-8 text-black/50 italic">
+            “El festival está cada vez más cerca”
           </p>
         </motion.div>
-
-        {/* CONTENT */}
-        <div className="flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-14">
-
-          {/* CALENDARIO JAPONÉS */}
-          <motion.div
-            whileHover={{
-              scale: 1.02,
-            }}
-            className="
-              relative
-              w-[320px]
-              h-[430px]
-              bg-[#f4ecdf]
-              border
-              border-black/10
-              shadow-[0_30px_80px_rgba(0,0,0,0.45)]
-              overflow-hidden
-            "
-          >
-            {/* textura */}
-            <div className="absolute inset-0 opacity-[0.04] bg-[url('/images/grain.png')]" />
-
-            {/* top */}
-            <div className="border-b border-black/10 text-center py-6 px-6">
-              <p className="text-neutral-500 text-xs tracking-[0.35em] uppercase">
-                Próximo Evento
-              </p>
-
-              <p className="text-black/50 text-sm mt-2">
-                Martes • Julio
-              </p>
-            </div>
-
-            {/* número gigante estilo japonés */}
-            <div className="flex flex-col items-center justify-center h-[210px]">
-              <p className="text-[8rem] text-black leading-none font-light">
-                七
-              </p>
-
-              <div className="w-24 h-px bg-black/20 my-4" />
-
-              <p className="text-black text-lg tracking-[0.2em] uppercase">
-                4 de Julio
-              </p>
-            </div>
-
-            {/* sello rojo japonés */}
-            <div className="absolute bottom-8 left-8">
-              <div
-                className="
-                  w-20
-                  h-20
-                  border-2
-                  border-[#9b0000]
-                  text-[#9b0000]
-                  flex
-                  items-center
-                  justify-center
-                  rotate-[-8deg]
-                  text-2xl
-                  font-bold
-                "
-              >
-                祭
-              </div>
-            </div>
-
-            {/* fecha derecha */}
-            <div className="absolute bottom-8 right-8 text-right">
-              <p className="text-black/50 text-xs uppercase tracking-[0.25em]">
-                Julio
-              </p>
-
-              <p className="text-black text-5xl font-bold leading-none">
-                04
-              </p>
-
-              <p className="text-black/40 text-sm">
-                2026
-              </p>
-            </div>
-          </motion.div>
-
-          {/* COUNTDOWN */}
-          <div className="grid grid-cols-2 gap-4">
-            {[
-              {
-                label: "Días",
-                value:
-                  timeLeft.days,
-              },
-              {
-                label: "Horas",
-                value:
-                  timeLeft.hours,
-              },
-              {
-                label: "Min",
-                value:
-                  timeLeft.minutes,
-              },
-              {
-                label: "Seg",
-                value:
-                  timeLeft.seconds,
-              },
-            ].map(
-              (item, i) => (
-                <motion.div
-                  key={i}
-                  whileHover={{
-                    scale: 1.05,
-                  }}
-                  className="
-                    w-32
-                    h-32
-                    bg-white/10
-                    backdrop-blur-xl
-                    border
-                    border-white/10
-                    flex
-                    flex-col
-                    items-center
-                    justify-center
-                  "
-                >
-                  <p className="text-4xl font-bold text-white">
-                    {
-                      item.value
-                    }
-                  </p>
-
-                  <p className="text-white/60 uppercase text-xs tracking-[0.2em] mt-2">
-                    {
-                      item.label
-                    }
-                  </p>
-                </motion.div>
-              )
-            )}
-          </div>
-        </div>
-
-        {/* frase */}
-        <p className="text-center text-white/55 italic mt-12 text-sm md:text-base">
-          “Una experiencia creada para fans del anime, cosplay y cultura asiática.”
-        </p>
       </div>
     </section>
   );

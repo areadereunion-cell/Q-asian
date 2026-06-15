@@ -9,7 +9,7 @@ import { Menu, X, ChevronDown } from "lucide-react";
 const navLinks = [
   { name: "INICIO", href: "/" },
   { name: "EMPRENDEDORES", href: "/emprendedores" },
-  { name: "ACTIVIDADES", href: "/actividades" },
+  { name: "ACTIVIDADES", href: "/" },
 ];
 
 const inscriptionLinks = [
@@ -30,22 +30,74 @@ const inscriptionLinks = [
 export default function Navbar() {
   const pathname = usePathname();
 
-  const [openDropdown, setOpenDropdown] = useState(false);
-  const [mobileMenu, setMobileMenu] = useState(false);
-  const [mobileDropdown, setMobileDropdown] = useState(false);
+  const [openDropdown, setOpenDropdown] =
+    useState(false);
+
+  const [mobileMenu, setMobileMenu] =
+    useState(false);
+
+  const [
+    mobileDropdown,
+    setMobileDropdown,
+  ] = useState(false);
 
   const isInscriptionActive =
     pathname.startsWith("/inscripcion");
 
   return (
     <header className="fixed top-0 left-0 w-full z-50">
-      <div className="relative bg-[#050505]/95 backdrop-blur-xl border-b border-[#ff3b30]/30 overflow-visible">
-        
-        {/* Glow */}
-        <div className="absolute inset-0 bg-[#ff3b30]/5 blur-[100px]" />
+      <div className="relative bg-[#f4f1e8]/95 backdrop-blur-xl border-b-2 border-black overflow-visible shadow-[0_5px_0_rgba(0,0,0,0.08)]">
+
+        {/* Manga Texture */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+
+          {/* Halftone */}
+          <div
+            className="
+              absolute inset-0
+              opacity-[0.06]
+              bg-[radial-gradient(circle,_#000_1px,_transparent_1.4px)]
+              bg-[size:12px_12px]
+            "
+          />
+
+          {/* Speed lines */}
+          <div
+            className="
+              absolute
+              top-[-30px]
+              right-[-50px]
+              w-[450px]
+              h-[220px]
+              opacity-[0.04]
+              rotate-[-8deg]
+              bg-[repeating-linear-gradient(
+                90deg,
+                black_0px,
+                black_2px,
+                transparent_2px,
+                transparent_14px
+              )]
+            "
+          />
+
+          {/* Ink blur */}
+          <div
+            className="
+              absolute
+              left-[20%]
+              top-[-80px]
+              w-[250px]
+              h-[250px]
+              rounded-full
+              bg-black/[0.03]
+              blur-[90px]
+            "
+          />
+        </div>
 
         <div className="relative h-20 md:h-24 px-4 md:px-12 flex items-center justify-between">
-          
+
           {/* Mobile Menu Button */}
           <button
             onClick={() =>
@@ -53,12 +105,13 @@ export default function Navbar() {
             }
             className="
               md:hidden
-              text-[#ff3b30]
+              text-black
               z-50
-              border
-              border-[#ff3b30]/30
+              border-2
+              border-black
+              bg-white/80
               p-2
-              hover:border-[#ff3b30]
+              hover:shadow-[3px_3px_0_rgba(0,0,0,0.18)]
               transition-all
             "
           >
@@ -79,34 +132,66 @@ export default function Navbar() {
             "
           >
             <motion.div
+              initial={{
+                y: 0,
+              }}
+              animate={{
+                y: [0, -2, 0],
+              }}
+              transition={{
+                duration: 3,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
               whileHover={{
-                scale: 1.03,
+                scale: 1.06,
               }}
               className="text-center"
             >
               <h1
                 className="
-                  text-[#ff3b30]
+                  text-black
                   text-3xl
                   sm:text-4xl
                   md:text-6xl
                   font-black
                   uppercase
                   leading-none
-                  tracking-[0.08em]
-                  drop-shadow-[0_0_20px_rgba(255,59,48,0.8)]
                 "
                 style={{
                   fontFamily:
                     "Teko, sans-serif",
+                  WebkitTextStroke:
+                    "1.4px black",
+                  textShadow:
+                    `
+                    3px 3px 0 rgba(0,0,0,0.12),
+                    0 0 12px rgba(0,0,0,0.08)
+                    `,
                 }}
               >
-                Q-ASIAN
+                <motion.span
+                  animate={{
+                    letterSpacing: [
+                      "0.06em",
+                      "0.09em",
+                      "0.06em",
+                    ],
+                  }}
+                  transition={{
+                    duration: 3,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                  className="inline-block"
+                >
+                  Q-ASIAN
+                </motion.span>
               </h1>
 
               <span
                 className="
-                  text-[#ff3b30]
+                  text-neutral-700
                   text-[10px]
                   md:text-sm
                   font-medium
@@ -123,7 +208,7 @@ export default function Navbar() {
 
           {/* Desktop Menu */}
           <nav className="hidden md:flex ml-auto items-center gap-3">
-            
+
             {navLinks.map((item) => {
               const active =
                 pathname === item.href;
@@ -148,14 +233,14 @@ export default function Navbar() {
                       uppercase
                       font-bold
                       tracking-[0.15em]
-                      border
+                      border-2
                       transition-all
                       duration-300
                       cursor-pointer
                       ${
                         active
-                          ? "bg-[#ff3b30] text-black border-[#ff3b30]"
-                          : "bg-transparent text-[#ff3b30] border-[#ff3b30]/40 hover:border-[#ff3b30] hover:shadow-[0_0_20px_rgba(255,59,48,0.6)]"
+                          ? "bg-black text-white border-black shadow-[4px_4px_0_rgba(0,0,0,0.2)]"
+                          : "bg-white/70 text-black border-black hover:bg-black hover:text-white hover:shadow-[4px_4px_0_rgba(0,0,0,0.15)]"
                       }
                     `}
                   >
@@ -186,7 +271,7 @@ export default function Navbar() {
                   uppercase
                   font-bold
                   tracking-[0.15em]
-                  border
+                  border-2
                   transition-all
                   duration-300
                   cursor-pointer
@@ -195,8 +280,8 @@ export default function Navbar() {
                   gap-2
                   ${
                     isInscriptionActive
-                      ? "bg-[#ff3b30] text-black border-[#ff3b30]"
-                      : "text-[#ff3b30] border-[#ff3b30]/40 hover:border-[#ff3b30]"
+                      ? "bg-black text-white border-black shadow-[4px_4px_0_rgba(0,0,0,0.2)]"
+                      : "bg-white/70 text-black border-black hover:bg-black hover:text-white hover:shadow-[4px_4px_0_rgba(0,0,0,0.15)]"
                   }
                 `}
               >
@@ -236,12 +321,12 @@ export default function Navbar() {
                       right-0
                       top-[110%]
                       w-[280px]
-                      bg-[#050505]/95
-                      backdrop-blur-xl
-                      border
-                      border-[#ff3b30]/30
-                      shadow-[0_0_30px_rgba(255,59,48,0.25)]
+                      bg-[#f4f1e8]
+                      border-2
+                      border-black
+                      shadow-[6px_6px_0_rgba(0,0,0,0.15)]
                       overflow-hidden
+                      z-50
                     "
                   >
                     {inscriptionLinks.map(
@@ -252,12 +337,8 @@ export default function Navbar() {
 
                         return (
                           <Link
-                            key={
-                              item.name
-                            }
-                            href={
-                              item.href
-                            }
+                            key={item.name}
+                            href={item.href}
                           >
                             <motion.div
                               whileHover={{
@@ -271,19 +352,17 @@ export default function Navbar() {
                                 tracking-[0.12em]
                                 font-bold
                                 border-b
-                                border-[#ff3b30]/10
+                                border-black/10
                                 transition-all
                                 duration-300
                                 ${
                                   active
-                                    ? "bg-[#ff3b30] text-black"
-                                    : "text-[#ff3b30] hover:bg-[#ff3b30]/10"
+                                    ? "bg-black text-white"
+                                    : "text-black hover:bg-black hover:text-white"
                                 }
                               `}
                             >
-                              {
-                                item.name
-                              }
+                              {item.name}
                             </motion.div>
                           </Link>
                         );
@@ -314,10 +393,10 @@ export default function Navbar() {
               }}
               className="
                 md:hidden
-                bg-[#050505]/95
+                bg-[#f4f1e8]/95
                 backdrop-blur-2xl
-                border-t
-                border-[#ff3b30]/20
+                border-t-2
+                border-black
                 px-4
                 py-4
                 space-y-3
@@ -331,16 +410,10 @@ export default function Navbar() {
 
                   return (
                     <Link
-                      key={
-                        item.name
-                      }
-                      href={
-                        item.href
-                      }
+                      key={item.name}
+                      href={item.href}
                       onClick={() =>
-                        setMobileMenu(
-                          false
-                        )
+                        setMobileMenu(false)
                       }
                     >
                       <div
@@ -349,25 +422,22 @@ export default function Navbar() {
                           py-4
                           uppercase
                           font-bold
-                          border
+                          border-2
                           transition-all
                           ${
                             active
-                              ? "bg-[#ff3b30] text-black border-[#ff3b30]"
-                              : "text-[#ff3b30] border-[#ff3b30]/30"
+                              ? "bg-black text-white border-black"
+                              : "bg-white/70 text-black border-black hover:bg-black hover:text-white"
                           }
                         `}
                       >
-                        {
-                          item.name
-                        }
+                        {item.name}
                       </div>
                     </Link>
                   );
                 }
               )}
 
-              {/* Mobile Dropdown */}
               <div>
                 <button
                   onClick={() =>
@@ -381,14 +451,15 @@ export default function Navbar() {
                     py-4
                     uppercase
                     font-bold
-                    border
+                    border-2
                     flex
                     justify-between
                     items-center
+                    transition-all
                     ${
                       isInscriptionActive
-                        ? "bg-[#ff3b30] text-black border-[#ff3b30]"
-                        : "text-[#ff3b30] border-[#ff3b30]/30"
+                        ? "bg-black text-white border-black"
+                        : "bg-white/70 text-black border-black hover:bg-black hover:text-white"
                     }
                   `}
                 >
@@ -416,35 +487,22 @@ export default function Navbar() {
                         opacity: 0,
                       }}
                       animate={{
-                        height:
-                          "auto",
+                        height: "auto",
                         opacity: 1,
                       }}
                       exit={{
                         height: 0,
                         opacity: 0,
                       }}
-                      className="
-                        overflow-hidden
-                        mt-2
-                        space-y-2
-                      "
+                      className="overflow-hidden mt-2 space-y-2"
                     >
                       {inscriptionLinks.map(
-                        (
-                          item
-                        ) => (
+                        (item) => (
                           <Link
-                            key={
-                              item.name
-                            }
-                            href={
-                              item.href
-                            }
+                            key={item.name}
+                            href={item.href}
                             onClick={() =>
-                              setMobileMenu(
-                                false
-                              )
+                              setMobileMenu(false)
                             }
                           >
                             <div
@@ -452,16 +510,18 @@ export default function Navbar() {
                                 px-4
                                 py-3
                                 ml-4
-                                border
-                                border-[#ff3b30]/20
-                                text-[#ff3b30]
+                                border-2
+                                border-black
+                                bg-white/70
+                                text-black
                                 text-sm
                                 uppercase
+                                hover:bg-black
+                                hover:text-white
+                                transition-all
                               "
                             >
-                              {
-                                item.name
-                              }
+                              {item.name}
                             </div>
                           </Link>
                         )
