@@ -39,7 +39,8 @@ export default function ActivitiesSection() {
         ACTIVITIES
       </h1>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-5 md:px-8">
+      {/* CONTENEDOR CENTRADO */}
+      <div className="relative z-10 w-full flex flex-col items-center px-4 md:px-8">
 
         {/* HEADER */}
         <motion.div
@@ -47,7 +48,7 @@ export default function ActivitiesSection() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
           viewport={{ once: true }}
-          className="text-center mb-14 md:mb-24"
+          className="text-center mb-14 md:mb-24 max-w-7xl w-full"
         >
           <p className="uppercase tracking-[0.35em] text-red-500 font-bold text-xs md:text-sm">
             EVENT EXPERIENCE
@@ -67,7 +68,7 @@ export default function ActivitiesSection() {
         </motion.div>
 
         {/* CARDS */}
-        <div className="flex flex-col md:flex-row gap-6 md:gap-0">
+        <div className="w-full flex flex-col md:flex-row justify-center items-center gap-6 md:gap-0">
 
           {activities.map((activity, index) => (
             <motion.div
@@ -100,7 +101,7 @@ export default function ActivitiesSection() {
               </div>
 
               {/* CONTENT */}
-              <div className="relative z-10 h-full flex flex-col justify-end p-6 md:p-14">
+              <div className="relative z-10 h-full flex flex-col justify-end items-center text-center p-6 md:p-14">
 
                 <p className="uppercase tracking-[0.3em] text-white/70 text-[10px] md:text-sm mb-3 md:mb-5">
                   EVENT ACTIVITY

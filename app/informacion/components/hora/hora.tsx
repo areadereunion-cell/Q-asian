@@ -37,7 +37,6 @@ export default function CountdownSection() {
 
   const weekDays = ["L", "M", "X", "J", "V", "S", "D"];
 
-  // ✅ FIX: ya NO usar JSX.Element[]
   const cells = [];
 
   for (let i = 0; i < month.start; i++) {
@@ -50,18 +49,11 @@ export default function CountdownSection() {
     cells.push(
       <div
         key={day}
-        className={`
-          w-7 h-7 md:w-8 md:h-8
-          flex items-center justify-center
-          text-[11px] md:text-xs
-          mx-auto
-          transition-all
-          ${
-            isEventDay
-              ? "bg-[#c90000] text-white rounded-full font-bold shadow-md"
-              : "text-black/70"
-          }
-        `}
+        className={`w-7 h-7 md:w-8 md:h-8 flex items-center justify-center text-[11px] md:text-xs transition-all ${
+          isEventDay
+            ? "bg-[#c90000] text-white rounded-full font-bold shadow-md"
+            : "text-black/70"
+        }`}
       >
         {day}
       </div>
@@ -69,22 +61,23 @@ export default function CountdownSection() {
   }
 
   return (
-    <section className="relative overflow-hidden pt-24 pb-40">
-      {/* BACKGROUND */}
+    <section className="relative overflow-hidden pt-24 pb-40 w-full">
+      {/* Background */}
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{ backgroundImage: "url('/images/tatami.jpg')" }}
       />
       <div className="absolute inset-0 bg-black/60" />
 
-      <div className="relative z-10 max-w-5xl mx-auto px-4">
+      {/* Contenedor */}
+      <div className="relative z-10 w-full flex justify-center px-4 md:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          className="bg-[#f6f4ef] border-[3px] border-black shadow-[8px_8px_0px_#000] p-6"
+          className="w-full max-w-7xl bg-[#f6f4ef] border-[3px] border-black shadow-[8px_8px_0px_#000] p-6 md:p-10 flex flex-col items-center"
         >
-          {/* COUNTDOWN */}
-          <div className="flex justify-center gap-6 mb-10 text-black">
+          {/* Countdown */}
+          <div className="w-full flex justify-center items-center flex-wrap gap-6 md:gap-10 mb-10 text-black">
             {[
               { label: "DÍAS", value: timeLeft.days },
               { label: "HORAS", value: timeLeft.hours },
@@ -102,24 +95,24 @@ export default function CountdownSection() {
             ))}
           </div>
 
-          {/* CALENDAR */}
-          <div>
+          {/* Calendar */}
+          <div className="w-full max-w-md flex flex-col items-center">
             <h3 className="text-center text-2xl mb-3 text-black/80">
               {month.name}
             </h3>
 
-            <div className="grid grid-cols-7 text-center text-[10px] mb-2 text-black/50">
+            <div className="grid grid-cols-7 w-full text-center text-[10px] mb-2 text-black/50">
               {weekDays.map((d) => (
                 <div key={d}>{d}</div>
               ))}
             </div>
 
-            <div className="grid grid-cols-7 gap-y-2 justify-items-center">
+            <div className="grid grid-cols-7 gap-y-2 justify-items-center w-full">
               {cells}
             </div>
           </div>
 
-          {/* FOOTER */}
+          {/* Footer */}
           <p className="text-center mt-8 text-black/50 italic">
             “El festival está cada vez más cerca”
           </p>

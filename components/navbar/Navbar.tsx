@@ -9,7 +9,7 @@ import { Menu, X, ChevronDown } from "lucide-react";
 const navLinks = [
   { name: "INICIO", href: "/" },
   { name: "EMPRENDEDORES", href: "/emprendedores" },
-  { name: "ACTIVIDADES", href: "/" },
+  { name: "ACTIVIDADES", href: "/informacion" },
 ];
 
 const inscriptionLinks = [
