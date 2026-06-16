@@ -11,12 +11,12 @@ export const emprendedores = {
     },
     {
       id: 2,
-      name: "Sakura Handmade",
-      image: "/images/bgas.png",
+      name: "Suamigurumi",
+      image: "/images/amigurumis.png",
       description:
-        "Artesanías inspiradas en anime y cultura japonesa.",
-      whatsapp: "593999999999",
-      tags: ["Handmade", "Anime"],
+        "Muñecos tejidos de personajes de películas, personalizados y llaveros artesanales.",
+      whatsapp: "593984655314",
+      tags: ["Amigurumi", "Handmade", "Personalizados", "Llaveros"],
     },
     {
       id: 3,
