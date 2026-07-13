@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { Inter, Teko } from "next/font/google";
 
-import "./globals.css";
 
-import Navbar from "@/components/navbarq/Navbar";
-import Footer from "@/components/footer/footer";
+
+import Navbar from "@/components/navbar/Navbar";
+import Footer from "@/app/Q-asian/informacion/components/footer/footer";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -60,7 +60,7 @@ export default function RootLayout({
         </main>
 
         {/* FOOTER GLOBAL */}
-
+        <Footer />
       </body>
     </html>
   );
