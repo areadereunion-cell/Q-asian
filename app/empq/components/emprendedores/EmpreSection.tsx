@@ -121,6 +121,59 @@ export default function EventsSection() {
                 de Quitumbe.
               </p>
 
+
+              {/* ESPACIO PARA BOTONES */}
+
+              <div className="
+                mt-12
+                flex
+                flex-wrap
+                gap-4
+              ">
+
+                <button
+                  onClick={() =>
+                    router.push("/eventos")
+                  }
+                  className="
+                    px-7
+                    py-3.5
+                    bg-red-500
+                    hover:bg-red-600
+                    text-white
+                    font-semibold
+                    rounded-lg
+                    transition-all
+                    duration-300
+                    hover:scale-105
+                  "
+                >
+                  Ver eventos
+                </button>
+
+                <button
+                  onClick={() =>
+                    router.push("/actividades")
+                  }
+                  className="
+                    px-7
+                    py-3.5
+                    border
+                    border-white/30
+                    hover:border-white/60
+                    hover:bg-white/10
+                    text-white
+                    font-semibold
+                    rounded-lg
+                    transition-all
+                    duration-300
+                  "
+                >
+                  Ver actividades
+                </button>
+
+              </div>
+
             </div>
 
           </motion.div>

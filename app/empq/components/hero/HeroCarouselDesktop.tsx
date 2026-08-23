@@ -252,32 +252,25 @@ export default function HeroCarousel({
                           scale: 0.96,
                         }}
                         className="
-                        mt-5
-                        px-5
-                        py-2.5
-                        md:px-8
-                        md:py-3
-
-                        rounded-full
-
-                        bg-white
-                        text-red-700
-
-                        font-semibold
-
-                        text-sm
-                        md:text-base
-
-                        flex
-                        items-center
-                        justify-center
-                        gap-3
-
-                        shadow-lg
-
-                        hover:bg-red-600
-                        hover:text-white
-                        transition-all
+                          mt-8
+                          px-7
+                          py-3.5
+                          md:px-10
+                          md:py-4
+                          rounded-full
+                          bg-white
+                          text-red-700
+                          font-semibold
+                          text-sm
+                          md:text-base
+                          flex
+                          items-center
+                          justify-center
+                          gap-3
+                          shadow-lg
+                          hover:bg-red-600
+                          hover:text-white
+                          transition-all
                         "
                       >
                         {slide.button}

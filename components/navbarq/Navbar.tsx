@@ -10,8 +10,8 @@ import { useState } from "react";
 const links = [
   { name: "INICIO", href: "/" },
   { name: "EVENTOS", href: "/empq/eventos" },
-  { name: "EMPRENDEDORES", href: "/emprendedores" },
-  { name: "CONTÁCTANOS", href: "/contactanos" },
+  { name: "EMPRENDEDORES", href: "/empq/emprendedores" },
+  { name: "CONTÁCTANOS", href: "/empq/inscripcion/stands" },
 ];
 
 export default function Navbar() {

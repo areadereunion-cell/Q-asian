@@ -7,10 +7,10 @@ export default function AboutSection() {
   const router = useRouter();
 
   return (
-    <section className="bg-white py-24">
+    <section className="bg-white py-32 lg:py-40">
 
       <div className="
-        max-w-6xl
+        max-w-7xl
         mx-auto
         px-8
         lg:px-16
@@ -19,8 +19,10 @@ export default function AboutSection() {
         <div className="
           grid
           lg:grid-cols-2
-          gap-16
+          gap-20
+          lg:gap-24
           items-center
+          min-h-[650px]
         ">
 
           {/* Imagen */}
@@ -50,7 +52,8 @@ export default function AboutSection() {
               overflow-hidden
               rounded-xl
               group
-              lg:translate-x-10
+              lg:translate-x-4
+              w-full
             "
           >
 
@@ -68,6 +71,7 @@ export default function AboutSection() {
               className="
                 w-full
                 h-[420px]
+                lg:h-[500px]
                 object-cover
               "
             />
@@ -128,7 +132,7 @@ export default function AboutSection() {
           </motion.div>
 
 
-          {/* Texto */}
+          {/* Texto + Imagen de fondo */}
 
           <motion.div
             initial={{
@@ -142,60 +146,121 @@ export default function AboutSection() {
             viewport={{
               once: true,
             }}
+            className="
+              relative
+              min-h-[500px]
+              flex
+              items-center
+              overflow-hidden
+              rounded-2xl
+            "
           >
 
+            {/* MARCA DE AGUA */}
+
+            <div
+              className="
+                absolute
+                inset-0
+                flex
+                items-center
+                justify-center
+                pointer-events-none
+                z-0
+              "
+            >
+              <img
+                src="/images/fondo-emprendedores.jpg"
+                alt=""
+                className="
+                  w-[85%]
+                  h-[85%]
+                  object-cover
+                  opacity-[0.20]
+                "
+              />
+            </div>
+
+
+            {/* DEGRADADO SUAVE PARA MEJORAR LA LECTURA */}
+
+            <div
+              className="
+                absolute
+                inset-0
+                bg-white/35
+                pointer-events-none
+                z-0
+              "
+            />
+
+
+            {/* CONTENIDO */}
+
             <div className="
-              w-16
-              h-1
-              bg-red-600
-              mb-6
-            "/>
-
-            <p className="
-              text-blue-700
-              uppercase
-              tracking-[0.25em]
-              text-sm
-              font-semibold
+              relative
+              z-10
+              w-full
+              max-w-xl
+              px-4
+              lg:px-8
+              py-10
             ">
-              Emprendedores Quitumbe
-            </p>
 
-            <h2 className="
-              mt-4
-              text-4xl
-              md:text-5xl
-              font-bold
-              text-slate-900
-              leading-tight
-            ">
-              Fortalecemos el talento emprendedor de nuestra comunidad
-            </h2>
+              <div className="
+                w-16
+                h-1
+                bg-red-600
+                mb-6
+              "/>
 
-            <p className="
-              mt-6
-              text-lg
-              text-slate-600
-              leading-relaxed
-            ">
-              Generamos espacios para apoyar,
-              visibilizar y conectar a los
-              emprendedores de Quitumbe,
-              impulsando sus productos,
-              servicios e iniciativas locales.
-            </p>
+              <p className="
+                text-blue-700
+                uppercase
+                tracking-[0.25em]
+                text-sm
+                font-semibold
+              ">
+                Emprendedores Quitumbe
+              </p>
 
-            <p className="
-              mt-4
-              text-slate-600
-              leading-relaxed
-            ">
-              A través de actividades,
-              acompañamiento y participación
-              comunitaria, trabajamos para
-              fortalecer el desarrollo económico
-              de nuestra zona.
-            </p>
+              <h2 className="
+                mt-4
+                text-4xl
+                md:text-5xl
+                font-bold
+                text-slate-900
+                leading-tight
+              ">
+                Fortalecemos el talento emprendedor de nuestra comunidad
+              </h2>
+
+              <p className="
+                mt-6
+                text-lg
+                text-slate-600
+                leading-relaxed
+              ">
+                Generamos espacios para apoyar,
+                visibilizar y conectar a los
+                emprendedores de Quitumbe,
+                impulsando sus productos,
+                servicios e iniciativas locales.
+              </p>
+
+              <p className="
+                mt-4
+                text-slate-600
+                leading-relaxed
+              ">
+                A través de actividades,
+                acompañamiento y participación
+                comunitaria, trabajamos para
+                fortalecer el desarrollo económico
+                de nuestra zona.
+              </p>
+
+            </div>
 
           </motion.div>
 
